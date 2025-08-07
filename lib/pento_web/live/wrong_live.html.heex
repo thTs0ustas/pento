@@ -1,0 +1,25 @@
+<h1>Your score: {@score}</h1>
+<h2 :if={@match}>Correct!</h2>
+<h2 :if={!@match}>Wrong!</h2>
+
+<div class="flex gap-1">
+  <.link
+    :for={n <- 1..10}
+    href="#"
+    phx-click="guess"
+    phx-value-number={n}
+    class="rounded-lg
+      p-2 border w-8 text-center
+      hover:translate-x-[0.1rem]
+      hover:translate-y-[-0.1rem]
+      hover:shadow
+      hover:bg-slate-200
+    "
+  >
+    {n}
+  </.link>
+</div>
+<pre>
+    {@current_user.email}
+    {@session_id}
+</pre>
