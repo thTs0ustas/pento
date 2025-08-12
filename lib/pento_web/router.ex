@@ -3,6 +3,19 @@ defmodule PentoWeb.Router do
 
   import PentoWeb.UserAuth
 
+  # def redirect_to_guess(conn, _opts) do
+  #   %{request_path: request_path, assigns: assigns} = conn
+  #   %{current_user: user} = assigns
+
+  #   if user && request_path === "/" do
+  #     conn
+  #     |> Phoenix.Controller.redirect(to: "/guess")
+  #     |> Plug.Conn.halt()
+  #   else
+  #     conn
+  #   end
+  # end
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -11,6 +24,7 @@ defmodule PentoWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug :fetch_current_user
+    # plug :redirect_to_guess
   end
 
   pipeline :api do
@@ -69,6 +83,13 @@ defmodule PentoWeb.Router do
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
       live "/guess", WrongLive
+
+      live "/products", ProductsLive.Index, :index
+      live "/products/new", ProductsLive.Index, :new
+      live "/products/:id/edit", ProductsLive.Index, :edit
+
+      live "/products/:id", ProductsLive.Show, :show
+      live "/products/:id/show/edit", ProductsLive.Show, :edit
     end
   end
 
